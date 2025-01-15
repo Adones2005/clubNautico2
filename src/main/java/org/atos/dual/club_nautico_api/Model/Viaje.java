@@ -1,21 +1,25 @@
 package org.atos.dual.club_nautico_api.Model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Entity
-public class Viaje extends DomainEntity {
+@Data
+public class Viaje {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-
-    private LocalDateTime fecha_hora;
+    private LocalDateTime fechaHora;
     private String descripcion;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "organizador", nullable = false)
+    @JoinColumn(name = "organizador_id", nullable = false)
     private Persona organizador;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "barco", nullable = false)
+    @JoinColumn(name = "barco_id", nullable = false)
     private Barco barco;
 }

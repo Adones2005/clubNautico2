@@ -1,14 +1,24 @@
 package org.atos.dual.club_nautico_api.Model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.List;
 
 @Entity
-public class Persona extends DomainEntity {
+@Data
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Persona {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
+    @Column(nullable = false)
     private String nombre;
+
+    @Column(nullable = false)
     private String apellidos;
+
     private String telefono;
     private String direccion;
     private Boolean esPatron;
