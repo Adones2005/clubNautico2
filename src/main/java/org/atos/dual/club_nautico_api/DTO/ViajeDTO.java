@@ -6,6 +6,6 @@ import lombok.Data;
 public class ViajeDTO {
     private Long id;
     private String descripcion;
-    private Long barcoId;
-    private Long organizadorId;
+    private BarcoDTO barco;
+    private PersonaDTO organizador;
 }

@@ -7,6 +7,7 @@ public class PersonaDTO {
     private Long id;
     private String nombre;
     private String apellidos;
+    private String DNI;
     private String telefono;
     private String direccion;
     private Boolean esPatron;

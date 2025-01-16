@@ -1,8 +1,6 @@
 package org.atos.dual.club_nautico_api.Controller;
 
-
 import org.atos.dual.club_nautico_api.DTO.PersonaDTO;
-import org.atos.dual.club_nautico_api.Model.Persona;
 import org.atos.dual.club_nautico_api.Service.PersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,43 +11,36 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/personas")
-class PersonaController {
+public class PersonaController {
     @Autowired
     private PersonaService personaService;
 
     @GetMapping
-    public ResponseEntity<List<Persona>> getAllPersonas() {
-        return ResponseEntity.ok(personaService.getAllPersonas());
+    public ResponseEntity<List<PersonaDTO>> getAllPersonas() {
+        List<PersonaDTO> personas = personaService.getAllPersonas();
+        return ResponseEntity.ok(personas);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Persona> getPersona(@PathVariable Long id) {
+    public ResponseEntity<PersonaDTO> getPersona(@PathVariable Long id) {
         return personaService.getPersona(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     @PostMapping
-    public ResponseEntity<Persona> createPersona(@RequestBody PersonaDTO personaDTO) {
-        Persona persona = new Persona();
-        persona.setNombre(personaDTO.getNombre());
-        persona.setApellidos(personaDTO.getApellidos());
-        persona.setTelefono(personaDTO.getTelefono());
-        persona.setDireccion(personaDTO.getDireccion());
-        persona.setEsPatron(personaDTO.getEsPatron());
-        return new ResponseEntity<>(personaService.savePersona(persona), HttpStatus.CREATED);
+    public ResponseEntity<PersonaDTO> createPersona(@RequestBody PersonaDTO personaDTO) {
+        PersonaDTO createdPersona = personaService.savePersona(personaDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdPersona);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Persona> updatePersona(@PathVariable Long id, @RequestBody PersonaDTO personaDTO) {
+    public ResponseEntity<PersonaDTO> updatePersona(@PathVariable Long id, @RequestBody PersonaDTO personaDTO) {
         return personaService.getPersona(id)
                 .map(existingPersona -> {
-                    existingPersona.setNombre(personaDTO.getNombre());
-                    existingPersona.setApellidos(personaDTO.getApellidos());
-                    existingPersona.setTelefono(personaDTO.getTelefono());
-                    existingPersona.setDireccion(personaDTO.getDireccion());
-                    existingPersona.setEsPatron(personaDTO.getEsPatron());
-                    return ResponseEntity.ok(personaService.savePersona(existingPersona));
+                    personaDTO.setId(id); // Forzar el uso del ID del recurso.
+                    PersonaDTO updatedPersona = personaService.savePersona(personaDTO);
+                    return ResponseEntity.ok(updatedPersona);
                 })
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }

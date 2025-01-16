@@ -1,7 +1,6 @@
 package org.atos.dual.club_nautico_api.Controller;
 
 import org.atos.dual.club_nautico_api.DTO.MiembroDTO;
-import org.atos.dual.club_nautico_api.Model.Miembro;
 import org.atos.dual.club_nautico_api.Service.MiembroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,37 +11,36 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/miembros")
-class MiembroController {
+public class MiembroController {
     @Autowired
     private MiembroService miembroService;
 
     @GetMapping
-    public ResponseEntity<List<Miembro>> getAllMiembros() {
-        return ResponseEntity.ok(miembroService.getAllMiembros());
+    public ResponseEntity<List<MiembroDTO>> getAllMiembros() {
+        List<MiembroDTO> miembros = miembroService.getAllMiembros();
+        return ResponseEntity.ok(miembros);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Miembro> getMiembro(@PathVariable Long id) {
+    public ResponseEntity<MiembroDTO> getMiembro(@PathVariable Long id) {
         return miembroService.getMiembro(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
-    @PostMapping
-    public ResponseEntity<Miembro> createMiembro(@RequestBody MiembroDTO miembroDTO) {
-        Miembro miembro = new Miembro();
-        miembro.setNombre(miembroDTO.getNombre());
-        miembro.setApellidos(miembroDTO.getApellidos());
-        return new ResponseEntity<>(miembroService.saveMiembro(miembro), HttpStatus.CREATED);
+    @PostMapping()
+    public ResponseEntity<MiembroDTO> createMiembro(@RequestBody MiembroDTO miembroDTO) {
+        MiembroDTO createdMiembro = miembroService.saveMiembro(miembroDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdMiembro);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Miembro> updateMiembro(@PathVariable Long id, @RequestBody MiembroDTO miembroDTO) {
+    public ResponseEntity<MiembroDTO> updateMiembro(@PathVariable Long id, @RequestBody MiembroDTO miembroDTO) {
         return miembroService.getMiembro(id)
                 .map(existingMiembro -> {
-                    existingMiembro.setNombre(miembroDTO.getNombre());
-                    existingMiembro.setApellidos(miembroDTO.getApellidos());
-                    return ResponseEntity.ok(miembroService.saveMiembro(existingMiembro));
+                    miembroDTO.setId(id); // Aseguramos que se respete el ID del recurso
+                    MiembroDTO updatedMiembro = miembroService.saveMiembro(miembroDTO);
+                    return ResponseEntity.ok(updatedMiembro);
                 })
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }

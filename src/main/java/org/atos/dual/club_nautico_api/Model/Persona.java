@@ -19,6 +19,9 @@ public class Persona {
     @Column(nullable = false)
     private String apellidos;
 
+    @Column(unique = true)
+    private String DNI;
+
     private String telefono;
     private String direccion;
     private Boolean esPatron;
