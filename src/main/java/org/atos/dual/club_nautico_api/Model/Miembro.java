@@ -8,8 +8,12 @@ import java.util.List;
 @Entity
 @Data
 public class Miembro extends Persona {
+
     @OneToMany(mappedBy = "propietario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Barco> barcos;
+
+    @OneToOne()
+    private Persona persona;
 
 
 }
