@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PersonaRepository extends JpaRepository<Persona, Long> {
-    boolean existsByDNI(String DNI);
-    Persona findByDNI(String DNI);
+    boolean existsByDni(String DNI);
+    Persona findByDni(String DNI);
 }

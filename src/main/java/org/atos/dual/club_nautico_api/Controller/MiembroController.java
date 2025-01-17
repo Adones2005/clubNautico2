@@ -38,7 +38,6 @@ public class MiembroController {
     public ResponseEntity<MiembroDTO> updateMiembro(@PathVariable Long id, @RequestBody MiembroDTO miembroDTO) {
         return miembroService.getMiembro(id)
                 .map(existingMiembro -> {
-                    miembroDTO.setId(id); // Aseguramos que se respete el ID del recurso
                     MiembroDTO updatedMiembro = miembroService.saveMiembro(miembroDTO);
                     return ResponseEntity.ok(updatedMiembro);
                 })

@@ -16,10 +16,10 @@ public class Viaje {
     private String descripcion;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "organizador_id", nullable = false)
+    @JoinColumn(name = "organizador_id")
     private Persona organizador;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "barco_id", nullable = false)
+    @JoinColumn(name = "barco_id")
     private Barco barco;
 }

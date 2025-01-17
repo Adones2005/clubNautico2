@@ -7,7 +7,6 @@ import java.util.List;
 
 @Entity
 @Data
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Persona {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +19,7 @@ public class Persona {
     private String apellidos;
 
     @Column(unique = true)
-    private String DNI;
+    private String dni;
 
     private String telefono;
     private String direccion;
@@ -28,4 +27,6 @@ public class Persona {
 
     @OneToMany(mappedBy = "organizador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Viaje> viajes;
+
+
 }

@@ -37,34 +37,8 @@ public class MiembroService {
     }
 
     public MiembroDTO saveMiembro(MiembroDTO miembroDTO) {
-        // Verificar si la persona existe por DNI
-        Persona persona = personaRepository.findByDNI(miembroDTO.getDNI());
-        if (persona == null) {
-            // Retornar null o lanzar una excepción si no existe la persona con el DNI
-            return null;
-        }
-
-        // Verificar si la persona ya es miembro
-        Miembro miembro = miembroRepository.findById(persona.getId()).orElse(null);
-
-        if (miembro == null) {
-            // Si la persona no es miembro, crear un nuevo miembro
-            miembro = new Miembro();
-            miembro.setId(null);  // Dejar que el sistema genere un nuevo ID
-        }
-
-        // Asignar los datos de la persona al miembro
-        miembro.setNombre(persona.getNombre());
-        miembro.setApellidos(persona.getApellidos());
-        miembro.setDNI(persona.getDNI());
-        miembro.setTelefono(persona.getTelefono());
-        miembro.setDireccion(persona.getDireccion());
-        miembro.setEsPatron(persona.getEsPatron());
-
-        // Guardar o actualizar el miembro en la base de datos
-        Miembro savedMiembro = miembroRepository.saveAndFlush(miembro);
-
-        // Retornar el MiembroDTO mapeado desde la entidad guardada
+        Miembro miembro = miembroMapper.toEntity(miembroDTO);
+        Miembro savedMiembro = miembroRepository.save(miembro);
         return miembroMapper.toDTO(savedMiembro);
     }
 
