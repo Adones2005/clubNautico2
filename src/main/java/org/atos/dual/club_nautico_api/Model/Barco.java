@@ -21,8 +21,8 @@ public class Barco {
     private Integer amarre;
     private double tarifa;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "propietario_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "propietario_id")
     private Miembro propietario;
 
     @OneToMany(mappedBy = "barco", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
