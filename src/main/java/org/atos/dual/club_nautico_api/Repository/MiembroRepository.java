@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface MiembroRepository extends JpaRepository<Miembro, Long> {
 
     boolean existsByPersonaId(Long id);
+    Miembro findByPersonaId(Long id);
 }

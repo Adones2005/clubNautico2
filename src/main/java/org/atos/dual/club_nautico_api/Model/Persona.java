@@ -24,4 +24,8 @@ public class Persona {
 
     @OneToMany(mappedBy = "organizador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Viaje> viajes;
+
+    @OneToOne(mappedBy = "persona",orphanRemoval = true,cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Miembro miembro;
 }

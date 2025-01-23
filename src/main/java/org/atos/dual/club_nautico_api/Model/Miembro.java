@@ -17,6 +17,7 @@ public class Miembro {
     private List<Barco> barcos;
 
     @OneToOne
+    @MapsId
     @JoinColumn(name = "persona_id", referencedColumnName = "id", nullable = false, unique = true)
     private Persona persona;
 }
