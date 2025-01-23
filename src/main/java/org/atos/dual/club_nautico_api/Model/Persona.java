@@ -18,15 +18,10 @@ public class Persona {
     @Column(nullable = false)
     private String apellidos;
 
-    @Column(unique = true)
-    private String dni;
-
     private String telefono;
     private String direccion;
     private Boolean esPatron;
 
     @OneToMany(mappedBy = "organizador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Viaje> viajes;
-
-
 }

@@ -11,14 +11,12 @@ public class Miembro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JoinColumn(name = "persona_id")
     private Long id;
 
     @OneToMany(mappedBy = "propietario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Barco> barcos;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "persona_id", nullable = false)
+    @OneToOne
+    @JoinColumn(name = "persona_id", referencedColumnName = "id", nullable = false, unique = true)
     private Persona persona;
-
 }
