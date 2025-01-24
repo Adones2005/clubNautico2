@@ -22,7 +22,7 @@ public class Persona {
     private String direccion;
     private Boolean esPatron;
 
-    @OneToMany(mappedBy = "organizador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "organizador", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Viaje> viajes;
 
     @OneToOne(mappedBy = "persona",orphanRemoval = true,cascade = CascadeType.ALL)

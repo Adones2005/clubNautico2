@@ -13,7 +13,7 @@ public class Miembro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "propietario", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "propietario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Barco> barcos;
 
     @OneToOne
