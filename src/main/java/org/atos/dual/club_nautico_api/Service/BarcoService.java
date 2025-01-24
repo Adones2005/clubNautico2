@@ -161,15 +161,13 @@ public class BarcoService {
         try {
             if (!barcoRepository.existsById(id)) {
                 String errorMessage = "Error: El barco con ID " + id + " no existe.";
-                System.out.println(errorMessage);
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
             }
             barcoRepository.deleteById(id);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } catch (Exception e) {
-            System.err.println("Error inesperado al eliminar el barco: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error inesperado al eliminar el barco.");
+                    .body("Error inesperado al eliminar el barco: ");
         }
     }
 }
