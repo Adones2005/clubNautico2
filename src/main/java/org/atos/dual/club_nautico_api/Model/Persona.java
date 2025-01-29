@@ -27,6 +27,4 @@ public class Persona {
 
     @OneToMany(mappedBy = "organizador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Viaje> viajes;
-
-
 }
