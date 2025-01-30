@@ -52,7 +52,7 @@ public class DataInitializer {
                 admin.setPassword("$2b$12$FVRijCavVZ7Qt15.CQssHe9m/6eLAdjAv0PiOKFIjMU161wApxzye");
                 admin.setNombre("Admin");
                 admin.setApellidos("User");
-                Set<Role> roles1 = new HashSet<Role>();
+                Set<Role> roles1 = new HashSet<>();
                 roles1.add(adminRole);
                 admin.setRoles(roles1);
 
