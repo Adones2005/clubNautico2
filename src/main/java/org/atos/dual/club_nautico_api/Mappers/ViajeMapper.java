@@ -23,6 +23,7 @@ public class ViajeMapper {
         ViajeDTO dto = new ViajeDTO();
         dto.setId(viaje.getId());
         dto.setDescripcion(viaje.getDescripcion());
+        dto.setFechaHora(viaje.getFechaHora());
         dto.setBarco(barcoMapper.toDTO(viaje.getBarco()));
         dto.setOrganizador(personaMapper.toDTO(viaje.getOrganizador()));
         return dto;
@@ -32,6 +33,7 @@ public class ViajeMapper {
         Viaje viaje = new Viaje();
         viaje.setId(dto.getId());
         viaje.setDescripcion(dto.getDescripcion());
+        viaje.setFechaHora(dto.getFechaHora());
         viaje.setBarco(barcoMapper.toEntity(dto.getBarco()));
         viaje.setOrganizador(personaMapper.toEntity((dto.getOrganizador())));
         return viaje;

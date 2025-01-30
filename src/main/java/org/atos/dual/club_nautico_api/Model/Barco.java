@@ -22,9 +22,11 @@ public class Barco {
     private double tarifa;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "propietario_id", nullable = false, foreignKey = @ForeignKey(name = "fk_barco_propietario"))
+    @JoinColumn(name = "propietario_id", nullable = false)
     private Miembro propietario;
 
     @OneToMany(mappedBy = "barco", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Viaje> viajes;
+
+
 }

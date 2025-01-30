@@ -1,16 +1,9 @@
 package org.atos.dual.club_nautico_api.Mappers;
 
-import org.atos.dual.club_nautico_api.DTO.BarcoDTO;
 import org.atos.dual.club_nautico_api.DTO.MiembroDTO;
-import org.atos.dual.club_nautico_api.Model.Barco;
 import org.atos.dual.club_nautico_api.Model.Miembro;
-import org.atos.dual.club_nautico_api.Model.Persona;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class MiembroMapper {
@@ -18,27 +11,24 @@ public class MiembroMapper {
     @Autowired
     private PersonaMapper personaMapper;
 
-    @Autowired
-    @Lazy
-    private BarcoMapper barcoMapper;
-
     public MiembroDTO toDTO(Miembro miembro) {
+        if (miembro == null) {
+            return null;
+        }
         MiembroDTO dto = new MiembroDTO();
-        dto.setPersonaDTO(personaMapper.toDTO(miembro.getPersona()));
-        List<BarcoDTO> barcosDTO = miembro.getBarcos().stream()
-                .map(barcoMapper::toDTO)
-                .toList();
-        dto.setBarcosDTO(barcosDTO);
+        dto.setId(miembro.getId());
+        dto.setPersona(personaMapper.toDTO(miembro.getPersona())); // Mapeo de Persona
         return dto;
     }
 
+    // Convierte de MiembroDTO a Miembro
     public Miembro toEntity(MiembroDTO dto) {
+        if (dto == null) {
+            return null;
+        }
         Miembro miembro = new Miembro();
-        miembro.setPersona(personaMapper.toEntity(dto.getPersonaDTO()));
-        List<Barco> barcos = dto.getBarcosDTO().stream()
-                .map(barcoMapper::toEntity)
-                .toList();
-        miembro.setBarcos(barcos);
+        miembro.setId(dto.getId());
+        miembro.setPersona(personaMapper.toEntity(dto.getPersona())); // Mapeo de PersonaDTO
         return miembro;
     }
 }
