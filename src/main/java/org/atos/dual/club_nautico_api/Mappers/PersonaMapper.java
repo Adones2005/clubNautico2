@@ -12,7 +12,6 @@ public class PersonaMapper {
         dto.setId(persona.getId());
         dto.setNombre(persona.getNombre());
         dto.setApellidos(persona.getApellidos());
-        dto.setDni(persona.getDni());
         dto.setTelefono(persona.getTelefono());
         dto.setDireccion(persona.getDireccion());
         dto.setEsPatron(persona.getEsPatron());
@@ -24,7 +23,6 @@ public class PersonaMapper {
         persona.setId(dto.getId());
         persona.setNombre(dto.getNombre());
         persona.setApellidos(dto.getApellidos());
-        persona.setDni(dto.getDni());
         persona.setTelefono(dto.getTelefono());
         persona.setDireccion(dto.getDireccion());
         persona.setEsPatron(dto.getEsPatron());
