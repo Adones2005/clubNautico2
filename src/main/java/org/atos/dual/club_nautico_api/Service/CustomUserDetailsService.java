@@ -2,8 +2,9 @@ package org.atos.dual.club_nautico_api.Service;
 
 
 
+import org.atos.dual.club_nautico_api.Model.Persona;
 import org.atos.dual.club_nautico_api.Model.Role;
-import org.atos.dual.club_nautico_api.Repository.UserRepository;
+import org.atos.dual.club_nautico_api.Repository.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,12 +17,12 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 
     @Autowired
-    private UserRepository userRepository;
+    private PersonaRepository personaRepository;
 
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username)
+        Persona user = personaRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + username));
 
 
@@ -35,7 +36,6 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .accountExpired(false)
                 .accountLocked(false)
                 .credentialsExpired(false)
-                .disabled(!user.isEnabled())
                 .build();
     }
 }

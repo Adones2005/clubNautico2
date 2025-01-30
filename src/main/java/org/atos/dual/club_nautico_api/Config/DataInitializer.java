@@ -64,7 +64,7 @@ public class DataInitializer {
                 miembro.setApellidos("User");
                 Set<Role> roles2 = new HashSet<>();
                 roles2.add(miembroRole);
-                admin.setRoles(roles2);
+                miembro.setRoles(roles2);
 
                 // Crear y guardar la persona normal
                 Persona normal = new Persona();
@@ -74,7 +74,7 @@ public class DataInitializer {
                 normal.setApellidos("User");
                 Set<Role> roles3 = new HashSet<>();
                 roles3.add(userRole);
-                admin.setRoles(roles3);
+                normal.setRoles(roles3);
 
                 // Guardar las personas en la base de datos
                 personaRepository.save(admin);

@@ -25,8 +25,8 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = "users") // Excluye `users` para evitar problemas de recursión en toString.
-@EqualsAndHashCode(exclude = "users") // Excluye `users` para evitar problemas de recursión en equals y hashCode.
+@ToString(exclude = "personas") // Excluye `personas` para evitar problemas de recursión en toString.
+@EqualsAndHashCode(exclude = "personas") // Excluye `personas` para evitar problemas de recursión en equals y hashCode.
 public class Role {
 
 
@@ -51,7 +51,7 @@ public class Role {
 
     // Relación muchos a muchos con la entidad `User`. Un rol puede pertenecer a muchos usuarios.
     @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
-    private Set<User> users;
+    private Set<Persona> personas;
 
 
 
