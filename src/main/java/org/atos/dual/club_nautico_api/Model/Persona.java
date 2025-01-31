@@ -5,7 +5,9 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.atos.dual.club_nautico_api.DTO.PersonaDTO;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.List;
@@ -13,6 +15,7 @@ import java.util.Set;
 
 @Entity
 @Data
+@NoArgsConstructor
 @ToString(exclude = "roles") // Excluye roles para evitar problemas de recursión en el toString.
 @EqualsAndHashCode(exclude = "roles") // Excluye roles para evitar recursión en equals y hashCode.
 @EntityListeners(AuditingEntityListener.class) // Habilita las anotaciones de auditoría.
@@ -53,4 +56,15 @@ public class Persona {
 
     @OneToMany(mappedBy = "organizador", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Viaje> viajes;
+
+    // Constructor que acepta un DTO
+    public Persona(PersonaDTO personaDTO) {
+        this.username = personaDTO.getUsername();
+        this.password = personaDTO.getPassword();
+        this.nombre = personaDTO.getNombre();
+        this.apellidos = personaDTO.getApellidos();
+        this.telefono = personaDTO.getTelefono();
+        this.direccion = personaDTO.getDireccion();
+        this.esPatron = personaDTO.isEsPatron();
+    }
 }

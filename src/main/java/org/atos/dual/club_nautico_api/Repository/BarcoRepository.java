@@ -10,4 +10,5 @@ import java.util.List;
 public interface BarcoRepository extends JpaRepository<Barco, Long> {
 
     List<Barco> findAllByPropietarioId(Long id);
+    Barco findByNombre(String s);
 }

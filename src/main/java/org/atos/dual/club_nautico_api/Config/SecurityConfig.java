@@ -41,7 +41,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // Las APIs REST no suelen necesitar CSRF
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Sin sesiones
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/personas","/api/viajes").hasRole("USER") // Solo USER
+                        .requestMatchers("/api/personas","/api/viajes","/api/barcos").hasRole("USER") // Solo USER
                         .requestMatchers("/api/barcos","/api/viajes").hasRole("MIEMBRO") // Solo MANAGER
                         .requestMatchers("/api/barcos","/api/viajes","/api/personas","/api/miembros").hasRole("ADMIN") // Solo ADMIN
                         .requestMatchers("/api/v1/authenticate", "/api/v1/register").permitAll() // Endpoints públicos

@@ -13,12 +13,13 @@ public class PersonaMapper {
             return null;
         }
         PersonaDTO dto = new PersonaDTO();
-        dto.setId(persona.getId());
         dto.setNombre(persona.getNombre());
         dto.setApellidos(persona.getApellidos());
         dto.setTelefono(persona.getTelefono());
         dto.setDireccion(persona.getDireccion());
-        dto.setEsPatron(persona.getEsPatron());
+        dto.setUsername(persona.getUsername());
+        dto.setPassword(persona.getPassword());  // Si es necesario incluir el password
+        dto.setEsPatron(persona.getEsPatron() != null ? persona.getEsPatron() : false); // Si es nulo, poner false
         return dto;
     }
 
@@ -27,13 +28,8 @@ public class PersonaMapper {
         if (dto == null) {
             return null;
         }
-        Persona persona = new Persona();
-        persona.setId(dto.getId());
-        persona.setNombre(dto.getNombre());
-        persona.setApellidos(dto.getApellidos());
-        persona.setTelefono(dto.getTelefono());
-        persona.setDireccion(dto.getDireccion());
-        persona.setEsPatron(dto.getEsPatron());
+        // Usar el constructor para crear la entidad Persona
+        Persona persona = new Persona(dto);
         return persona;
     }
 }

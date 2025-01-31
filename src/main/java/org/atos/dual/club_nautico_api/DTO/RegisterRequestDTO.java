@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class PersonaDTO {
+public class RegisterRequestDTO {
     @NotBlank
     private String nombre;
 
@@ -22,5 +22,5 @@ public class PersonaDTO {
 
     private boolean esPatron;
 
-    // Getters y Setters
+
 }

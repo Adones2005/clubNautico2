@@ -46,10 +46,11 @@ public class JwtUtil {
     }
 
 
-    public String generateToken(String username, List<String> roles){
+    public String generateToken(String username, List<String> roles, Long personaId){
         return Jwts.builder()
                 .subject(username)
                 .claim("roles",roles)
+                .claim("userId", personaId)
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
                 .signWith(getSigningKey())

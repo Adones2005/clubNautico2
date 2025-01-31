@@ -74,10 +74,10 @@ public class ViajeService {
             }
 
             // Verificar si la persona existe
-            Optional<Persona> personaOptional = personaRepository.findById(viajeDTO.getOrganizador().getId());
+            Optional<Persona> personaOptional = personaRepository.findByUsername(viajeDTO.getOrganizador().getUsername());
             if (personaOptional.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                        .body("Error: La persona con ID " + viajeDTO.getOrganizador().getId() + " no existe.");
+                        .body("Error: La persona con Username " + viajeDTO.getOrganizador().getUsername() + " no existe.");
             }
 
             // Usar las entidades gestionadas
@@ -119,9 +119,9 @@ public class ViajeService {
             }
 
             // Verificar si la persona existe
-            Optional<Persona> personaOptional = personaRepository.findById(viajeDTO.getOrganizador().getId());
+            Optional<Persona> personaOptional = personaRepository.findByUsername(viajeDTO.getOrganizador().getUsername());
             if (personaOptional.isEmpty()) {
-                String errorMessage = "Error: La persona con ID " + viajeDTO.getOrganizador().getId() + " no existe.";
+                String errorMessage = "Error: La persona con Username " + viajeDTO.getOrganizador().getUsername() + " no existe.";
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
             }
 

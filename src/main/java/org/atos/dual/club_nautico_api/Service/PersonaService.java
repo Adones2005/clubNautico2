@@ -76,7 +76,7 @@ public class PersonaService {
             persona.setApellidos(personaDTO.getApellidos());
             persona.setDireccion(personaDTO.getDireccion());
             persona.setTelefono(personaDTO.getTelefono());
-            persona.setEsPatron(personaDTO.getEsPatron());
+            persona.setEsPatron(personaDTO.isEsPatron());
 
             // Guarda la persona actualizada
             Persona updatedPersona = personaRepository.save(persona);

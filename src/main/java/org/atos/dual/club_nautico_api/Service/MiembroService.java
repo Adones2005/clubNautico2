@@ -60,14 +60,14 @@ public class MiembroService {
     public ResponseEntity<?> saveMiembro(MiembroDTO miembroDTO) {
         try {
             // Verifica si la persona ya está asociada a un miembro
-            if (miembroRepository.existsByPersonaId(miembroDTO.getPersona().getId())) {
+            if (miembroRepository.existsByPersonaUsername(miembroDTO.getPersona().getUsername())) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body("Error: La persona con ID " + miembroDTO.getPersona().getId() + " ya es miembro.");
+                        .body("Error: La persona con username " + miembroDTO.getPersona().getUsername() + " ya es miembro.");
             }
 
-            Persona persona = personaRepository.findById(miembroDTO.getPersona().getId())
+            Persona persona = personaRepository.findByUsername(miembroDTO.getPersona().getUsername())
                     .orElseThrow(() -> new RuntimeException(
-                            "Error: La persona con ID " + miembroDTO.getPersona().getId() + " no existe."));
+                            "Error: La persona con Username " + miembroDTO.getPersona().getUsername() + " no existe."));
 
             Miembro miembro = miembroMapper.toEntity(miembroDTO);
             miembro.setPersona(persona);
@@ -90,14 +90,14 @@ public class MiembroService {
                     .orElseThrow(() -> new RuntimeException("Error: El miembro con ID " + id + " no existe."));
 
             // Verifica si la persona ya está asociada a otro miembro
-            if (miembroRepository.existsByPersonaId(miembroDTO.getPersona().getId())) {
+            if (miembroRepository.existsByPersonaUsername(miembroDTO.getPersona().getUsername())) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body("Error: La persona con ID " + miembroDTO.getPersona().getId() + " ya es miembro.");
+                        .body("Error: La persona con username " + miembroDTO.getPersona().getUsername() + " ya es miembro.");
             }
 
-            Persona persona = personaRepository.findById(miembroDTO.getPersona().getId())
+            Persona persona = personaRepository.findByUsername(miembroDTO.getPersona().getUsername())
                     .orElseThrow(() -> new RuntimeException(
-                            "Error: La persona con ID " + miembroDTO.getPersona().getId() + " no existe."));
+                            "Error: La persona con username " + miembroDTO.getPersona().getUsername() + " no existe."));
 
             miembro.setPersona(persona); // Actualiza las propiedades
             Miembro updatedMiembro = miembroRepository.save(miembro);
